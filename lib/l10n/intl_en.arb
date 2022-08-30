@@ -1,0 +1,13 @@
+{
+    "myTodos": "My todos",
+    "done": "Done",
+    "new_": "New",
+    "whatShouldBeDone": "What should be done...",
+    "importance": "Importance",
+    "basic": "No",
+    "low": "Low",
+    "high": "!! High",
+    "deadline": "Deadline",
+    "delete": "Delete",
+    "save": "Save"
+}
