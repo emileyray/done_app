@@ -21,7 +21,7 @@ class FlavorConfig extends InheritedWidget {
   static FlavorConfig of(BuildContext context) {
     final FlavorConfig? result =
         context.dependOnInheritedWidgetOfExactType<FlavorConfig>();
-    assert(result != null, 'No FrogColor found in context');
+    assert(result != null, 'No FlavorConfig found in context');
     return result!;
   }
 

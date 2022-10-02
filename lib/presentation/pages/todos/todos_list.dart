@@ -49,23 +49,9 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
         ),
         sliver: SliverAnimatedList(
           key: listKey,
-          initialItemCount: currentlyShownList.length + 3,
+          initialItemCount: currentlyShownList.length + 1,
           itemBuilder: (context, index, animation) {
-            if (index == 0) {
-              return _DecoratedItem(
-                opacity: 1,
-                first: true,
-                child: Container(),
-              );
-            }
-            if (index == currentlyShownList.length + 2) {
-              return _DecoratedItem(
-                opacity: 1,
-                last: true,
-                child: Container(),
-              );
-            }
-            if (index == currentlyShownList.length + 1) {
+            if (index == currentlyShownList.length) {
               return _AnimatedItem(
                 animation: _inputItemTween.animate(_inputItemController),
                 child: const _InputItem(),
@@ -77,7 +63,7 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
                   index == currentlyShownList.length),
               animation: animation,
               child: TodosItem(
-                element: currentlyShownList[index - 1],
+                element: currentlyShownList[index],
                 showDone: widget.showDone,
               ),
             );
@@ -138,7 +124,7 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
     currentlyShownList.removeAt(idxToRemove);
 
     listKey.currentState!.removeItem(
-      idxToRemove + 1,
+      idxToRemove,
       (context, animation) {
         return Container();
       },
@@ -161,7 +147,7 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
           currentlyShownList.removeAt(idxToRemove);
 
           listKey.currentState!.removeItem(
-            idxToRemove + 1,
+            idxToRemove,
             (context, animation) {
               return _AnimatedItem(
                 animation: animation,
@@ -183,7 +169,7 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
         int idxToAdd = tasks.indexWhere((e) => e.id == task.id);
 
         currentlyShownList.insert(idxToAdd, task);
-        listKey.currentState!.insertItem(idxToAdd + 1);
+        listKey.currentState!.insertItem(idxToAdd);
       }
     }
   }
@@ -254,28 +240,16 @@ class _DecoratedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeBloc, AppTheme>(builder: (context, state) {
-      return Material(
-        color: Colors.transparent,
-        elevation: opacity == 0 ? 0 : 1,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(first ? 8 : 0),
-          bottom: Radius.circular(last ? 8 : 0),
-        ),
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
         child: Container(
-          padding: EdgeInsets.only(
-            top: first ? 8 : 0,
-            bottom: last ? 8 : 0,
-          ),
           decoration: BoxDecoration(
             color: getIt.get<ThemeBloc>().currentTheme.backSecondary,
             border: Border.all(
               width: 0,
               color: getIt.get<ThemeBloc>().currentTheme.backSecondary,
             ),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(first ? 8 : 0),
-              bottom: Radius.circular(last ? 8 : 0),
-            ),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
           ),
           child: Opacity(opacity: opacity, child: child),
         ),
