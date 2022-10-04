@@ -60,7 +60,7 @@ class _TodosListState extends State<TodosList> with TickerProviderStateMixin {
 
             return _AnimatedItem(
               animate: !(_inputItemController.isAnimating &&
-                  index == currentlyShownList.length),
+                  index == currentlyShownList.length - 1),
               animation: animation,
               child: TodosItem(
                 element: currentlyShownList[index],
