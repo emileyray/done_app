@@ -26,13 +26,14 @@ class TodoAdapter extends TypeAdapter<Todo> {
       createdAt: fields[6] as int,
       changedAt: fields[7] as int,
       deviceId: fields[8] as String,
+      tag: fields[9] as Tag?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Todo obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class TodoAdapter extends TypeAdapter<Todo> {
       ..writeByte(7)
       ..write(obj.changedAt)
       ..writeByte(8)
-      ..write(obj.deviceId);
+      ..write(obj.deviceId)
+      ..writeByte(9)
+      ..write(obj.tag);
   }
 
   @override
@@ -108,6 +111,50 @@ class ImportanceAdapter extends TypeAdapter<Importance> {
           typeId == other.typeId;
 }
 
+class TagAdapter extends TypeAdapter<Tag> {
+  @override
+  final int typeId = 2;
+
+  @override
+  Tag read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Tag.home;
+      case 1:
+        return Tag.work;
+      case 2:
+        return Tag.study;
+      default:
+        return Tag.home;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Tag obj) {
+    switch (obj) {
+      case Tag.home:
+        writer.writeByte(0);
+        break;
+      case Tag.work:
+        writer.writeByte(1);
+        break;
+      case Tag.study:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TagAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -122,6 +169,7 @@ _$_Todo _$$_TodoFromJson(Map<String, dynamic> json) => _$_Todo(
       createdAt: json['created_at'] as int,
       changedAt: json['changed_at'] as int,
       deviceId: json['last_updated_by'] as String,
+      tag: $enumDecodeNullable(_$TagEnumMap, json['tag']),
     );
 
 Map<String, dynamic> _$$_TodoToJson(_$_Todo instance) => <String, dynamic>{
@@ -134,10 +182,17 @@ Map<String, dynamic> _$$_TodoToJson(_$_Todo instance) => <String, dynamic>{
       'created_at': instance.createdAt,
       'changed_at': instance.changedAt,
       'last_updated_by': instance.deviceId,
+      'tag': _$TagEnumMap[instance.tag],
     };
 
 const _$ImportanceEnumMap = {
   Importance.low: 'low',
   Importance.basic: 'basic',
   Importance.important: 'important',
+};
+
+const _$TagEnumMap = {
+  Tag.home: 'home',
+  Tag.work: 'work',
+  Tag.study: 'important',
 };

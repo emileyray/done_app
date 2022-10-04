@@ -133,10 +133,11 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
           ? event.deadline!.toUtc().millisecondsSinceEpoch
           : null,
       done: false,
-      color: null,
+      color: event.color,
       createdAt: now.toUtc().millisecondsSinceEpoch,
       changedAt: now.toUtc().millisecondsSinceEpoch,
       deviceId: await getDeviceId() ?? '',
+      tag: event.tag,
     );
 
     _currentTodos.add(itemToAdd);

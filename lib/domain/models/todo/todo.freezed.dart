@@ -47,6 +47,9 @@ mixin _$Todo {
   @JsonKey(name: 'last_updated_by')
   @HiveField(8)
   String get deviceId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tag')
+  @HiveField(9)
+  Tag? get tag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +69,8 @@ abstract class $TodoCopyWith<$Res> {
       @JsonKey(name: 'color') @HiveField(5) String? color,
       @JsonKey(name: 'created_at') @HiveField(6) int createdAt,
       @JsonKey(name: 'changed_at') @HiveField(7) int changedAt,
-      @JsonKey(name: 'last_updated_by') @HiveField(8) String deviceId});
+      @JsonKey(name: 'last_updated_by') @HiveField(8) String deviceId,
+      @JsonKey(name: 'tag') @HiveField(9) Tag? tag});
 }
 
 /// @nodoc
@@ -88,6 +92,7 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
     Object? createdAt = freezed,
     Object? changedAt = freezed,
     Object? deviceId = freezed,
+    Object? tag = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -126,6 +131,10 @@ class _$TodoCopyWithImpl<$Res> implements $TodoCopyWith<$Res> {
           ? _value.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      tag: tag == freezed
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as Tag?,
     ));
   }
 }
@@ -144,7 +153,8 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       @JsonKey(name: 'color') @HiveField(5) String? color,
       @JsonKey(name: 'created_at') @HiveField(6) int createdAt,
       @JsonKey(name: 'changed_at') @HiveField(7) int changedAt,
-      @JsonKey(name: 'last_updated_by') @HiveField(8) String deviceId});
+      @JsonKey(name: 'last_updated_by') @HiveField(8) String deviceId,
+      @JsonKey(name: 'tag') @HiveField(9) Tag? tag});
 }
 
 /// @nodoc
@@ -167,6 +177,7 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
     Object? createdAt = freezed,
     Object? changedAt = freezed,
     Object? deviceId = freezed,
+    Object? tag = freezed,
   }) {
     return _then(_$_Todo(
       id: id == freezed
@@ -205,6 +216,10 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res>
           ? _value.deviceId
           : deviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      tag: tag == freezed
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as Tag?,
     ));
   }
 }
@@ -221,7 +236,8 @@ class _$_Todo implements _Todo {
       @JsonKey(name: 'color') @HiveField(5) required this.color,
       @JsonKey(name: 'created_at') @HiveField(6) required this.createdAt,
       @JsonKey(name: 'changed_at') @HiveField(7) required this.changedAt,
-      @JsonKey(name: 'last_updated_by') @HiveField(8) required this.deviceId});
+      @JsonKey(name: 'last_updated_by') @HiveField(8) required this.deviceId,
+      @JsonKey(name: 'tag') @HiveField(9) required this.tag});
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
@@ -261,10 +277,14 @@ class _$_Todo implements _Todo {
   @JsonKey(name: 'last_updated_by')
   @HiveField(8)
   final String deviceId;
+  @override
+  @JsonKey(name: 'tag')
+  @HiveField(9)
+  final Tag? tag;
 
   @override
   String toString() {
-    return 'Todo(id: $id, text: $text, importance: $importance, deadline: $deadline, done: $done, color: $color, createdAt: $createdAt, changedAt: $changedAt, deviceId: $deviceId)';
+    return 'Todo(id: $id, text: $text, importance: $importance, deadline: $deadline, done: $done, color: $color, createdAt: $createdAt, changedAt: $changedAt, deviceId: $deviceId, tag: $tag)';
   }
 
   @override
@@ -281,7 +301,8 @@ class _$_Todo implements _Todo {
             const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
             const DeepCollectionEquality().equals(other.changedAt, changedAt) &&
-            const DeepCollectionEquality().equals(other.deviceId, deviceId));
+            const DeepCollectionEquality().equals(other.deviceId, deviceId) &&
+            const DeepCollectionEquality().equals(other.tag, tag));
   }
 
   @JsonKey(ignore: true)
@@ -296,7 +317,8 @@ class _$_Todo implements _Todo {
       const DeepCollectionEquality().hash(color),
       const DeepCollectionEquality().hash(createdAt),
       const DeepCollectionEquality().hash(changedAt),
-      const DeepCollectionEquality().hash(deviceId));
+      const DeepCollectionEquality().hash(deviceId),
+      const DeepCollectionEquality().hash(tag));
 
   @JsonKey(ignore: true)
   @override
@@ -339,7 +361,10 @@ abstract class _Todo implements Todo {
           required final int changedAt,
       @JsonKey(name: 'last_updated_by')
       @HiveField(8)
-          required final String deviceId}) = _$_Todo;
+          required final String deviceId,
+      @JsonKey(name: 'tag')
+      @HiveField(9)
+          required final Tag? tag}) = _$_Todo;
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
@@ -379,6 +404,10 @@ abstract class _Todo implements Todo {
   @JsonKey(name: 'last_updated_by')
   @HiveField(8)
   String get deviceId;
+  @override
+  @JsonKey(name: 'tag')
+  @HiveField(9)
+  Tag? get tag;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

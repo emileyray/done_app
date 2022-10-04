@@ -206,6 +206,8 @@ class _AppBar extends StatelessWidget {
                     submitionData.importanceToSubmit ?? Importance.basic,
                 deadline: submitionData.deadlineToSubmit,
                 actionTool: ActionTool.settingsPage,
+                tag: Tag.work,
+                color: 'fc03ad',
               ),
             )
         : context.read<TodosBloc>().add(

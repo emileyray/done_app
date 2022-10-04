@@ -23,6 +23,7 @@ void mainCommon(FlavorConfigDTO flavorConfigDTO) async {
     await Hive.initFlutter();
     Hive.registerAdapter(ImportanceAdapter());
     Hive.registerAdapter(TodoAdapter());
+    Hive.registerAdapter(TagAdapter());
     await Hive.openBox<Todo>('todos');
     await Hive.openBox<int>('lastRevision');
     configureDependencies();

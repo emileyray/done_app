@@ -26,6 +26,7 @@ class FakeTodosRepsitoryImpl implements TodosRepository {
         createdAt: now.toUtc().millisecondsSinceEpoch,
         changedAt: now.toUtc().millisecondsSinceEpoch,
         deviceId: 'kek',
+        tag: Tag.home,
       );
     });
   }

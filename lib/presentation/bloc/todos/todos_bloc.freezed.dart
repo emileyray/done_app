@@ -24,7 +24,7 @@ mixin _$TodosEvent {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -38,7 +38,7 @@ mixin _$TodosEvent {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -52,7 +52,7 @@ mixin _$TodosEvent {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -152,7 +152,7 @@ class _$_Fetch implements _Fetch {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -169,7 +169,7 @@ class _$_Fetch implements _Fetch {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -186,7 +186,7 @@ class _$_Fetch implements _Fetch {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -372,7 +372,7 @@ class _$_Edit implements _Edit {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -389,7 +389,7 @@ class _$_Edit implements _Edit {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -406,7 +406,7 @@ class _$_Edit implements _Edit {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -567,7 +567,7 @@ class _$_Remove implements _Remove {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -584,7 +584,7 @@ class _$_Remove implements _Remove {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -601,7 +601,7 @@ class _$_Remove implements _Remove {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -677,6 +677,8 @@ abstract class _$$_AddCopyWith<$Res> {
       {ActionTool actionTool,
       String text,
       Importance importance,
+      String? color,
+      Tag? tag,
       DateTime? deadline});
 }
 
@@ -694,6 +696,8 @@ class __$$_AddCopyWithImpl<$Res> extends _$TodosEventCopyWithImpl<$Res>
     Object? actionTool = freezed,
     Object? text = freezed,
     Object? importance = freezed,
+    Object? color = freezed,
+    Object? tag = freezed,
     Object? deadline = freezed,
   }) {
     return _then(_$_Add(
@@ -709,6 +713,14 @@ class __$$_AddCopyWithImpl<$Res> extends _$TodosEventCopyWithImpl<$Res>
           ? _value.importance
           : importance // ignore: cast_nullable_to_non_nullable
               as Importance,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tag: tag == freezed
+          ? _value.tag
+          : tag // ignore: cast_nullable_to_non_nullable
+              as Tag?,
       deadline: deadline == freezed
           ? _value.deadline
           : deadline // ignore: cast_nullable_to_non_nullable
@@ -724,6 +736,8 @@ class _$_Add implements _Add {
       {required this.actionTool,
       required this.text,
       required this.importance,
+      this.color,
+      this.tag,
       this.deadline});
 
   @override
@@ -733,11 +747,15 @@ class _$_Add implements _Add {
   @override
   final Importance importance;
   @override
+  final String? color;
+  @override
+  final Tag? tag;
+  @override
   final DateTime? deadline;
 
   @override
   String toString() {
-    return 'TodosEvent.add(actionTool: $actionTool, text: $text, importance: $importance, deadline: $deadline)';
+    return 'TodosEvent.add(actionTool: $actionTool, text: $text, importance: $importance, color: $color, tag: $tag, deadline: $deadline)';
   }
 
   @override
@@ -750,6 +768,8 @@ class _$_Add implements _Add {
             const DeepCollectionEquality().equals(other.text, text) &&
             const DeepCollectionEquality()
                 .equals(other.importance, importance) &&
+            const DeepCollectionEquality().equals(other.color, color) &&
+            const DeepCollectionEquality().equals(other.tag, tag) &&
             const DeepCollectionEquality().equals(other.deadline, deadline));
   }
 
@@ -759,6 +779,8 @@ class _$_Add implements _Add {
       const DeepCollectionEquality().hash(actionTool),
       const DeepCollectionEquality().hash(text),
       const DeepCollectionEquality().hash(importance),
+      const DeepCollectionEquality().hash(color),
+      const DeepCollectionEquality().hash(tag),
       const DeepCollectionEquality().hash(deadline));
 
   @JsonKey(ignore: true)
@@ -775,12 +797,12 @@ class _$_Add implements _Add {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
   }) {
-    return add(actionTool, text, importance, deadline);
+    return add(actionTool, text, importance, color, tag, deadline);
   }
 
   @override
@@ -792,12 +814,12 @@ class _$_Add implements _Add {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
   }) {
-    return add?.call(actionTool, text, importance, deadline);
+    return add?.call(actionTool, text, importance, color, tag, deadline);
   }
 
   @override
@@ -809,14 +831,14 @@ class _$_Add implements _Add {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
     required TResult orElse(),
   }) {
     if (add != null) {
-      return add(actionTool, text, importance, deadline);
+      return add(actionTool, text, importance, color, tag, deadline);
     }
     return orElse();
   }
@@ -870,11 +892,15 @@ abstract class _Add implements TodosEvent {
       {required final ActionTool actionTool,
       required final String text,
       required final Importance importance,
+      final String? color,
+      final Tag? tag,
       final DateTime? deadline}) = _$_Add;
 
   ActionTool get actionTool;
   String get text;
   Importance get importance;
+  String? get color;
+  Tag? get tag;
   DateTime? get deadline;
   @JsonKey(ignore: true)
   _$$_AddCopyWith<_$_Add> get copyWith => throw _privateConstructorUsedError;
@@ -926,7 +952,7 @@ class _$_HideDone implements _HideDone {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -943,7 +969,7 @@ class _$_HideDone implements _HideDone {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -960,7 +986,7 @@ class _$_HideDone implements _HideDone {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -1066,7 +1092,7 @@ class _$_ShowDone implements _ShowDone {
         edit,
     required TResult Function(Todo item, ActionTool actionTool) remove,
     required TResult Function(ActionTool actionTool, String text,
-            Importance importance, DateTime? deadline)
+            Importance importance, String? color, Tag? tag, DateTime? deadline)
         add,
     required TResult Function() hideDone,
     required TResult Function() showDone,
@@ -1083,7 +1109,7 @@ class _$_ShowDone implements _ShowDone {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,
@@ -1100,7 +1126,7 @@ class _$_ShowDone implements _ShowDone {
         edit,
     TResult Function(Todo item, ActionTool actionTool)? remove,
     TResult Function(ActionTool actionTool, String text, Importance importance,
-            DateTime? deadline)?
+            String? color, Tag? tag, DateTime? deadline)?
         add,
     TResult Function()? hideDone,
     TResult Function()? showDone,

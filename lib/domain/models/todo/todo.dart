@@ -17,6 +17,19 @@ enum Importance {
   important,
 }
 
+@HiveType(typeId: 2)
+enum Tag {
+  @JsonValue("home")
+  @HiveField(0)
+  home,
+  @JsonValue("work")
+  @HiveField(1)
+  work,
+  @JsonValue("important")
+  @HiveField(2)
+  study,
+}
+
 @HiveType(typeId: 0)
 @freezed
 class Todo with _$Todo {
@@ -30,6 +43,7 @@ class Todo with _$Todo {
     @JsonKey(name: 'created_at') @HiveField(6) required int createdAt,
     @JsonKey(name: 'changed_at') @HiveField(7) required int changedAt,
     @JsonKey(name: 'last_updated_by') @HiveField(8) required String deviceId,
+    @JsonKey(name: 'tag') @HiveField(9) required Tag? tag,
   }) = _Todo;
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);

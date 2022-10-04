@@ -21,6 +21,8 @@ class TodosEvent with _$TodosEvent {
     required ActionTool actionTool,
     required String text,
     required Importance importance,
+    String? color,
+    Tag? tag,
     DateTime? deadline,
   }) = _Add;
 
